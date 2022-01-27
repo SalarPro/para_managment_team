@@ -1,0 +1,154 @@
+{
+  "project_info": {
+    "project_number": "571910263029",
+    "project_id": "personal-finance-manager-21433",
+    "storage_bucket": "personal-finance-manager-21433.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:571910263029:android:7c3588639095c0c3f6f5bc",
+        "android_client_info": {
+          "package_name": "com.example.para_managment_team"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "571910263029-uqms7c875f4omo0bg1imlg77fp2c3pgb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXHE6zjeO-vQf6IIGqF12xMr3Tnya7Iwo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "571910263029-uqms7c875f4omo0bg1imlg77fp2c3pgb.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "571910263029-9b6lpeci7sgsmqrq8t6tpkpjolj50294.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.wecode2"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:571910263029:android:98d33da4b5ac8c83f6f5bc",
+        "android_client_info": {
+          "package_name": "com.example.wecode2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "571910263029-uqms7c875f4omo0bg1imlg77fp2c3pgb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXHE6zjeO-vQf6IIGqF12xMr3Tnya7Iwo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "571910263029-uqms7c875f4omo0bg1imlg77fp2c3pgb.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "571910263029-9b6lpeci7sgsmqrq8t6tpkpjolj50294.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.wecode2"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:571910263029:android:f8dd6038eef6d77af6f5bc",
+        "android_client_info": {
+          "package_name": "com.paramangmanet.jobe"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "571910263029-uqms7c875f4omo0bg1imlg77fp2c3pgb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXHE6zjeO-vQf6IIGqF12xMr3Tnya7Iwo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "571910263029-uqms7c875f4omo0bg1imlg77fp2c3pgb.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "571910263029-9b6lpeci7sgsmqrq8t6tpkpjolj50294.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.wecode2"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:571910263029:android:eaf984dbc60c65ecf6f5bc",
+        "android_client_info": {
+          "package_name": "com.wecode.para"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "571910263029-uqms7c875f4omo0bg1imlg77fp2c3pgb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXHE6zjeO-vQf6IIGqF12xMr3Tnya7Iwo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "571910263029-uqms7c875f4omo0bg1imlg77fp2c3pgb.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "571910263029-9b6lpeci7sgsmqrq8t6tpkpjolj50294.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.wecode2"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

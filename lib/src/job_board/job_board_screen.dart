@@ -31,14 +31,15 @@ class _JobBoardScreenState extends State<JobBoardScreen> {
                         false ? CategorySearchDelegate() : JobSearchDelegate());
               }),
           Expanded(
-            child: FutureBuilder(
+            child: FutureBuilder<List<Job>>(
               future: FirebaseJob.getAllJobs(),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   return ListView.builder(
-                      itemCount: 10,
+                      itemCount: snapshot.data?.length ?? 0,
                       itemBuilder: (context, index) {
-                        return CardView();
+                        Job job = snapshot.data![index];
+                        return cardView(job);
                       });
                 } else {
                   return CircularProgressIndicator();

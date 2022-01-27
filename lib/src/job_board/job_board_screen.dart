@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:para_managment_team/src/azad/card_class.dart';
+import 'package:para_managment_team/src/salar/firebase_datamanaging.dart';
+import 'package:para_managment_team/src/salar/job_model.dart';
 
 class JobBoardScreen extends StatefulWidget {
   const JobBoardScreen({Key? key}) : super(key: key);
@@ -14,17 +17,37 @@ class _JobBoardScreenState extends State<JobBoardScreen> {
       appBar: AppBar(
         title: Text("Job Board"),
       ),
-      body: TextField(
-          decoration: InputDecoration(
-            border: OutlineInputBorder(),
-            hintText: 'Enter a search job',
-          ),
-          onTap: () {
-            showSearch(
-                context: context,
-                delegate:
-                    false ? CategorySearchDelegate() : JobSearchDelegate());
-          }),
+      body: Column(
+        children: [
+          TextField(
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                hintText: 'Enter a search job',
+              ),
+              onTap: () {
+                showSearch(
+                    context: context,
+                    delegate:
+                        false ? CategorySearchDelegate() : JobSearchDelegate());
+              }),
+          Expanded(
+            child: FutureBuilder(
+              future: FirebaseJob.getAllJobs(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return ListView.builder(
+                      itemCount: 10,
+                      itemBuilder: (context, index) {
+                        return CardView();
+                      });
+                } else {
+                  return CircularProgressIndicator();
+                }
+              },
+            ),
+          )
+        ],
+      ),
     );
   }
 }

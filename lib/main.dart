@@ -12,20 +12,21 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp().then((value) => debugPrint("firebase done"));
 
-  FirebaseJob.addJob(Job(
-    uid: "num1",
-    title: "We Code",
-    category: "Programming",
-    companyName: "We Code",
-    jobDescription: "Hello",
-    email: "info@salarpro.com",
-    numberOfHires: 4,
-    salaryEstimation: 1500,
-    validateTil: Timestamp.fromDate(DateTime(2022,2,1)),
-    createdAt: Timestamp.fromDate(DateTime.now()),
-    likedUID: ["salar","azad"],
-    numberOfViews: 0,
-  ));
+  // for (int i = 1; i < 6; i++)
+  //   FirebaseJob.updateJob(Job(
+  //     uid: "num$i",
+  //     title: "We Code",
+  //     category: "$i",
+  //     companyName: "We Code $i",
+  //     jobDescription: "Hello $i",
+  //     email: "info$i@salarpro.com",
+  //     numberOfHires: i * 2,
+  //     salaryEstimation: i * 1500,
+  //     validateTil: Timestamp.fromDate(DateTime(2022, 2, i)),
+  //     createdAt: Timestamp.fromDate(DateTime.now()),
+  //     likedUID: ["salar", "azad"],
+  //     numberOfViews: 0,
+  //   ));
 
   // Set up the SettingsController, which will glue user settings to multiple
   // Flutter Widgets.

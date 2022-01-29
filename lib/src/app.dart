@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:para_managment_team/src/Widget/detailedJobWidget.dart';
+import 'package:para_managment_team/src/add_a_job/add_job_screen.dart';
 import 'package:para_managment_team/src/job_board/job_board_screen.dart';
 import 'package:para_managment_team/src/main_view/main_view.dart';
 
@@ -73,6 +75,8 @@ class MyApp extends StatelessWidget {
                     return SettingsView(controller: settingsController);
                   case SampleItemDetailsView.routeName:
                     return const SampleItemDetailsView();
+                    case '/DetailedJobWidget':
+                    return DetailedJobWidget();
                   case SampleItemListView.routeName:
                   default:
                     return JobBoardScreen();

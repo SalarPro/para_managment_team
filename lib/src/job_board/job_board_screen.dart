@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:para_managment_team/src/azad/card_class.dart';
 import 'package:para_managment_team/src/salar/firebase_datamanaging.dart';
 import 'package:para_managment_team/src/salar/job_model.dart';
+import 'package:para_managment_team/src/temp/categories.dart';
 
 class JobBoardScreen extends StatefulWidget {
   const JobBoardScreen({Key? key}) : super(key: key);
@@ -11,24 +12,7 @@ class JobBoardScreen extends StatefulWidget {
 }
 
 class _JobBoardScreenState extends State<JobBoardScreen> {
-  
-  
-  
-  List<bool> _selections = [
-    true,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false
-  ];
+  List<bool> _selections = getListOfWidgetBool();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,28 +65,13 @@ class _JobBoardScreenState extends State<JobBoardScreen> {
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: ToggleButtons(
-              children: const <Widget>[
-                Text('all'),
-                Text('all'),
-                Text('all'),
-                Text('all'),
-                Text('all'),
-                Text('all'),
-                Text('all'),
-                Text('all'),
-                Text('all'),
-                Text('all'),
-                Text('all'),
-                Text('all'),
-                Text('all'),
-              ],
+              children: getListOfWidget(),
               isSelected: _selections,
               onPressed: (int newindex) {
                 setState(() {
                   for (int i = 0; i < _selections.length; i++) {
                     if (i == newindex) {
                       _selections[i] = true;
-                    
                     } else {
                       _selections[i] = false;
                     }
@@ -120,7 +89,16 @@ class _JobBoardScreenState extends State<JobBoardScreen> {
                       itemCount: snapshot.data?.length ?? 0,
                       itemBuilder: (context, index) {
                         Job job = snapshot.data![index];
-                        return cardView(job);
+                        return GestureDetector(
+                          child: cardView(job),
+                          onTap: () {
+                            selectedJob = job;
+                            Navigator.restorablePushNamed(
+                              context,
+                              '/DetailedJobWidget',
+                            );
+                          },
+                        );
                       });
                 } else {
                   return CircularProgressIndicator();
@@ -211,3 +189,5 @@ class JobSearchDelegate extends SearchDelegate {
     );
   }
 }
+
+Job selectedJob = Job();

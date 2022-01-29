@@ -2,8 +2,13 @@ import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
+import 'package:para_managment_team/src/temp/categories.dart';
 
 class Job {
+  JobCategory get jpbCategory {
+    return tempCategory[int.parse(category ?? "1")-1];
+  }
+
   String? uid;
   String? title;
   String? category;
@@ -16,6 +21,7 @@ class Job {
   Timestamp? createdAt;
   List<String>? likedUID;
   int? numberOfViews;
+
   Job({
     this.uid,
     this.title,
@@ -30,7 +36,6 @@ class Job {
     this.likedUID,
     this.numberOfViews,
   });
-
 
   Job copyWith({
     String? uid,
@@ -108,35 +113,35 @@ class Job {
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-  
+
     return other is Job &&
-      other.uid == uid &&
-      other.title == title &&
-      other.category == category &&
-      other.companyName == companyName &&
-      other.jobDescription == jobDescription &&
-      other.email == email &&
-      other.numberOfHires == numberOfHires &&
-      other.salaryEstimation == salaryEstimation &&
-      other.validateTil == validateTil &&
-      other.createdAt == createdAt &&
-      listEquals(other.likedUID, likedUID) &&
-      other.numberOfViews == numberOfViews;
+        other.uid == uid &&
+        other.title == title &&
+        other.category == category &&
+        other.companyName == companyName &&
+        other.jobDescription == jobDescription &&
+        other.email == email &&
+        other.numberOfHires == numberOfHires &&
+        other.salaryEstimation == salaryEstimation &&
+        other.validateTil == validateTil &&
+        other.createdAt == createdAt &&
+        listEquals(other.likedUID, likedUID) &&
+        other.numberOfViews == numberOfViews;
   }
 
   @override
   int get hashCode {
     return uid.hashCode ^
-      title.hashCode ^
-      category.hashCode ^
-      companyName.hashCode ^
-      jobDescription.hashCode ^
-      email.hashCode ^
-      numberOfHires.hashCode ^
-      salaryEstimation.hashCode ^
-      validateTil.hashCode ^
-      createdAt.hashCode ^
-      likedUID.hashCode ^
-      numberOfViews.hashCode;
+        title.hashCode ^
+        category.hashCode ^
+        companyName.hashCode ^
+        jobDescription.hashCode ^
+        email.hashCode ^
+        numberOfHires.hashCode ^
+        salaryEstimation.hashCode ^
+        validateTil.hashCode ^
+        createdAt.hashCode ^
+        likedUID.hashCode ^
+        numberOfViews.hashCode;
   }
 }

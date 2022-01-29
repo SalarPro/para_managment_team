@@ -3,6 +3,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:para_managment_team/src/salar/job_model.dart';
 
 class FirebaseJob {
+
+
+
+
+
   static Stream<List<Job>> countStream() async* {
     List<Job> listOfJobs = [];
     var snapshot = FirebaseFirestore.instance
@@ -63,4 +68,16 @@ class FirebaseJob {
         .doc(job.uid)
         .set(job.toMap());
   }
+
+
+  
+  static addViewFor(Job job) async {
+    await FirebaseFirestore.instance
+        .collection("jobs")
+        .doc(job.uid)
+        .update(Map.of({"numberOfViews" : FieldValue.increment(1)}));
+  }
+  
+
+
 }

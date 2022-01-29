@@ -16,7 +16,7 @@ List<JobCategory> tempCategory = [
 ];
 
 List<Widget> getListOfWidget() {
-  List<Widget> widgets = [];
+  List<Widget> widgets = [Text('All')];
 
   tempCategory.forEach((element) {
     widgets.add(Padding(
@@ -29,10 +29,10 @@ List<Widget> getListOfWidget() {
 }
 
 List<bool> getListOfWidgetBool() {
-  List<bool> widgets = [];
+  List<bool> widgets = [true];
 
   tempCategory.forEach((element) {
-    widgets.add(element.uid == "1");
+    widgets.add(false);
   });
 
   return widgets;

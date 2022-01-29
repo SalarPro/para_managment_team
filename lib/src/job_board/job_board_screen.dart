@@ -11,28 +11,109 @@ class JobBoardScreen extends StatefulWidget {
 }
 
 class _JobBoardScreenState extends State<JobBoardScreen> {
+  
+  
+  
+  List<bool> _selections = [
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Job Board"),
+        centerTitle: true,
+        title: const Text("Job Board"),
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          TextField(
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: 'Enter a search job',
+          Row(
+            children: [
+              Expanded(
+                flex: 4,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextField(
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        hintText: 'Enter a search job',
+                      ),
+                      onTap: () {
+                        showSearch(
+                            context: context, delegate: JobSearchDelegate());
+                      }),
+                ),
               ),
-              onTap: () {
-                showSearch(
-                    context: context,
-                    delegate:
-                        false ? CategorySearchDelegate() : JobSearchDelegate());
-              }),
+              Expanded(
+                child: PopupMenuButton(
+                    child: Row(
+                      children: const [
+                        Text("sort By"),
+                        Icon(Icons.arrow_drop_down_circle_outlined),
+                      ],
+                    ),
+                    itemBuilder: (context) => [
+                          const PopupMenuItem(
+                            child: Text("First"),
+                            value: 1,
+                          ),
+                          const PopupMenuItem(
+                            child: Text("Second"),
+                            value: 2,
+                          )
+                        ]),
+              )
+            ],
+          ),
+          const Text('Categories'),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: ToggleButtons(
+              children: const <Widget>[
+                Text('all'),
+                Text('all'),
+                Text('all'),
+                Text('all'),
+                Text('all'),
+                Text('all'),
+                Text('all'),
+                Text('all'),
+                Text('all'),
+                Text('all'),
+                Text('all'),
+                Text('all'),
+                Text('all'),
+              ],
+              isSelected: _selections,
+              onPressed: (int newindex) {
+                setState(() {
+                  for (int i = 0; i < _selections.length; i++) {
+                    if (i == newindex) {
+                      _selections[i] = true;
+                    
+                    } else {
+                      _selections[i] = false;
+                    }
+                  }
+                });
+              },
+            ),
+          ),
           Expanded(
             child: FutureBuilder<List<Job>>(
-              future: FirebaseJob.getAllJobs(),
+              future: FirebaseJob.getAllJobs2(),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   return ListView.builder(
@@ -54,8 +135,6 @@ class _JobBoardScreenState extends State<JobBoardScreen> {
 }
 
 class JobSearchDelegate extends SearchDelegate {
-  List<String> searchTitle = ['asdsd', 'asdfssfs', 'dfhg'];
-
   @override
   List<Widget> buildActions(BuildContext context) {
     return [
@@ -80,102 +159,54 @@ class JobSearchDelegate extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
-    List<String> matchQuery = [];
-    for (var item in searchTitle) {
-      if (item.toLowerCase().contains(query.toLowerCase())) {
-        matchQuery.add(item);
-      }
-    }
-    return ListView.builder(
-      itemCount: matchQuery.length,
-      itemBuilder: (context, index) {
-        var result = matchQuery[index];
-        return ListTile(
-          title: Text(result),
-        );
+    List<Job> matchQuery = [];
+
+    return FutureBuilder<List<Job>>(
+      future: FirebaseJob.getAllJobs(),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          for (var item in snapshot.data!) {
+            if (item.title!.toLowerCase().contains(query.toLowerCase())) {
+              matchQuery.add(item);
+            }
+          }
+          return ListView.builder(
+              itemCount: matchQuery?.length ?? 0,
+              itemBuilder: (context, index) {
+                Job job = matchQuery[index];
+
+                return cardView(job);
+              });
+        } else {
+          return CircularProgressIndicator();
+        }
       },
     );
   }
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    List<String> matchQuery = [];
-    for (var item in searchTitle) {
-      if (item.toLowerCase().contains(query.toLowerCase())) {
-        matchQuery.add(item);
-      }
-    }
-    return ListView.builder(
-      itemCount: matchQuery.length,
-      itemBuilder: (context, index) {
-        var result = matchQuery[index];
-        return ListTile(
-          title: Text(result),
-        );
-      },
-    );
-  }
-}
+    List<Job> matchQuery = [];
 
-class CategorySearchDelegate extends SearchDelegate {
-  List<String> searchItem = ['asdsd', 'asdfssfs', 'dfhg'];
+    return FutureBuilder<List<Job>>(
+      future: FirebaseJob.getAllJobs(),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          for (var item in snapshot.data!) {
+            if (item.title!.toLowerCase().contains(query.toLowerCase())) {
+              matchQuery.add(item);
+            }
+          }
+          return ListView.builder(
+              itemCount: matchQuery?.length ?? 0,
+              itemBuilder: (context, index) {
+                Job job = matchQuery[index];
 
-  @override
-  List<Widget> buildActions(BuildContext context) {
-    return [
-      IconButton(
-        icon: Icon(Icons.clear),
-        onPressed: () {
-          query = '';
-        },
-      ),
-    ];
-  }
-
-  @override
-  Widget buildLeading(BuildContext context) {
-    return IconButton(
-      icon: Icon(Icons.arrow_back),
-      onPressed: () {
-        close(context, null);
-      },
-    );
-  }
-
-  @override
-  Widget buildResults(BuildContext context) {
-    List<String> matchQuery = [];
-    for (var item in searchItem) {
-      if (item.toLowerCase().contains(query.toLowerCase())) {
-        matchQuery.add(item);
-      }
-    }
-    return ListView.builder(
-      itemCount: matchQuery.length,
-      itemBuilder: (context, index) {
-        var result = matchQuery[index];
-        return ListTile(
-          title: Text(result),
-        );
-      },
-    );
-  }
-
-  @override
-  Widget buildSuggestions(BuildContext context) {
-    List<String> matchQuery = [];
-    for (var item in searchItem) {
-      if (item.toLowerCase().contains(query.toLowerCase())) {
-        matchQuery.add(item);
-      }
-    }
-    return ListView.builder(
-      itemCount: matchQuery.length,
-      itemBuilder: (context, index) {
-        var result = matchQuery[index];
-        return ListTile(
-          title: Text(result),
-        );
+                return cardView(job);
+              });
+        } else {
+          return CircularProgressIndicator();
+        }
       },
     );
   }

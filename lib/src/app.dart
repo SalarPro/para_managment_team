@@ -75,8 +75,10 @@ class MyApp extends StatelessWidget {
                     return SettingsView(controller: settingsController);
                   case SampleItemDetailsView.routeName:
                     return const SampleItemDetailsView();
-                    case '/DetailedJobWidget':
+                  case '/DetailedJobWidget':
                     return DetailedJobWidget();
+                  case '/AddJob':
+                    return AddJob();
                   case SampleItemListView.routeName:
                   default:
                     return JobBoardScreen();

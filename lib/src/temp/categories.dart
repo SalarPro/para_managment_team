@@ -8,6 +8,7 @@ class JobCategory {
 }
 
 List<JobCategory> tempCategory = [
+  JobCategory(uid: "0", name: "All"),
   JobCategory(uid: "1", name: "Front-End developer"),
   JobCategory(uid: "2", name: "Back-End developer"),
   JobCategory(uid: "3", name: "Data Security"),
@@ -15,8 +16,18 @@ List<JobCategory> tempCategory = [
   JobCategory(uid: "5", name: "Full stack developer"),
 ];
 
+String getUIDForCategory(String categoryName) {
+  String uid = "";
+  tempCategory.forEach((element) {
+    if (element.name == categoryName) {
+      uid = element.uid!;
+    }
+  });
+  return uid;
+}
+
 List<Widget> getListOfWidget() {
-  List<Widget> widgets = [Text('All')];
+  List<Widget> widgets = [];
 
   tempCategory.forEach((element) {
     widgets.add(Padding(
@@ -29,10 +40,10 @@ List<Widget> getListOfWidget() {
 }
 
 List<bool> getListOfWidgetBool() {
-  List<bool> widgets = [true];
+  List<bool> widgets = [];
 
   tempCategory.forEach((element) {
-    widgets.add(false);
+    widgets.add(element.uid == "0");
   });
 
   return widgets;

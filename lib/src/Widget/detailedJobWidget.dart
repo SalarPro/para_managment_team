@@ -81,8 +81,28 @@ class _DetailedJobWidgetState extends State<DetailedJobWidget> {
                       margin: EdgeInsets.only(top: 15),
                       child: Icon(Icons.remove_red_eye_rounded))),
               Container(
-                  margin: EdgeInsets.only(left: 10, right: 10, top: 15),
-                  child: Text("${selectedJob.numberOfViews ?? 0}")),
+                margin: EdgeInsets.only(left: 10, right: 10, top: 15),
+                child: StreamBuilder(
+                  stream: FirebaseFirestore.instance
+                      .collection("jobs")
+                      .doc(selectedJob.uid)
+                      .snapshots(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      var tDoc = (snapshot.data
+                              as DocumentSnapshot<Map<String, dynamic>>)
+                          .data();
+                      if (tDoc == null) {
+                        return CircularProgressIndicator();
+                      }
+                      Job t = Job.fromMap(tDoc);
+                      return Text("${t.numberOfViews ?? 0}");
+                    } else {
+                      return CircularProgressIndicator();
+                    }
+                  },
+                ),
+              ),
             ],
           ),
           Container(

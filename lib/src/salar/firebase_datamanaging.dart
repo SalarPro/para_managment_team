@@ -18,21 +18,22 @@ class FirebaseJob {
     yield listOfJobs;
   }
 
- 
-
-  static Future<List<Job>> getAllJobs({String? category = '', bool desc=false}) async {
+  static Future<List<Job>> getAllJobs(
+      {String? category = '', bool desc = false}) async {
     var snapshot = await FirebaseFirestore.instance
         .collection("jobs")
-        .orderBy("createdAt",descending: desc)
+        .orderBy("createdAt", descending: desc)
         .get();
 
     List<Job> listOfJobs = [];
 
     snapshot.docs.forEach((element) {
-      if (element.data()['category'].toString() == category) {
-        listOfJobs.add(Job.fromMap(element.data()));
-      } else if (category == '') {
-        listOfJobs.add(Job.fromMap(element.data()));
+      Job job = Job.fromMap(element.data());
+      debugPrint(category);
+      if (category == "0" || category == '') {
+        listOfJobs.add(job);
+      } else if (job.category == category) {
+        listOfJobs.add(job);
       }
     });
 
@@ -40,7 +41,10 @@ class FirebaseJob {
   }
 
   static addJob(Job job) async {
-    await FirebaseFirestore.instance.collection("jobs").doc().set(job.toMap());
+    await FirebaseFirestore.instance
+        .collection("jobs")
+        .doc(job.uid)
+        .set(job.toMap());
   }
 
   static updateJob(Job job) async {

@@ -6,7 +6,15 @@ import 'package:para_managment_team/src/temp/categories.dart';
 
 class Job {
   JobCategory get jpbCategory {
-    return tempCategory[int.parse(category ?? "1")-1];
+    debugPrint(category);
+    int index = 0;
+    try {
+      index = int.parse(category ?? "0");
+    } catch (error) {
+      debugPrint(error.toString());
+    }
+
+    return tempCategory[index];
   }
 
   String? uid;

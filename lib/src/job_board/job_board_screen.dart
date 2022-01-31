@@ -69,7 +69,7 @@ class _JobBoardScreenState extends State<JobBoardScreen> {
                             },
                           ),
                           PopupMenuItem(
-                            child: Text("latest"),
+                            child: Text("Oldest"),
                             value: 2,
                             onTap: () {
                               desc = !desc;
@@ -91,6 +91,7 @@ class _JobBoardScreenState extends State<JobBoardScreen> {
                   for (int i = 0; i < _selections.length; i++) {
                     if (i == newindex) {
                       _selections[i] = true;
+                      debugPrint(i.toString());
                       selectCategory = tempCategory[i].uid;
                     } else {
                       _selections[i] = false;

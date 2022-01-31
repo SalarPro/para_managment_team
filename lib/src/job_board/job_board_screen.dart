@@ -13,9 +13,20 @@ class JobBoardScreen extends StatefulWidget {
 
 class _JobBoardScreenState extends State<JobBoardScreen> {
   List<bool> _selections = getListOfWidgetBool();
+  String? selectCategory = "";
+  bool desc = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () {
+          Navigator.restorablePushNamed(
+            context,
+            '/AddJob',
+          );
+        },
+      ),
       appBar: AppBar(
         centerTitle: true,
         title: const Text("Job Board"),
@@ -49,13 +60,21 @@ class _JobBoardScreenState extends State<JobBoardScreen> {
                       ],
                     ),
                     itemBuilder: (context) => [
-                          const PopupMenuItem(
-                            child: Text("First"),
+                          PopupMenuItem(
+                            child: Text("Recent"),
                             value: 1,
+                            onTap: () {
+                              desc = !desc;
+                              setState(() {});
+                            },
                           ),
-                          const PopupMenuItem(
-                            child: Text("Second"),
+                          PopupMenuItem(
+                            child: Text("latest"),
                             value: 2,
+                            onTap: () {
+                              desc = !desc;
+                              setState(() {});
+                            },
                           )
                         ]),
               )
@@ -72,6 +91,7 @@ class _JobBoardScreenState extends State<JobBoardScreen> {
                   for (int i = 0; i < _selections.length; i++) {
                     if (i == newindex) {
                       _selections[i] = true;
+                      selectCategory = tempCategory[i].uid;
                     } else {
                       _selections[i] = false;
                     }
@@ -82,7 +102,8 @@ class _JobBoardScreenState extends State<JobBoardScreen> {
           ),
           Expanded(
             child: FutureBuilder<List<Job>>(
-              future: FirebaseJob.getAllJobs2(),
+              future:
+                  FirebaseJob.getAllJobs(category: selectCategory, desc: desc),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   return ListView.builder(
@@ -153,7 +174,16 @@ class JobSearchDelegate extends SearchDelegate {
               itemBuilder: (context, index) {
                 Job job = matchQuery[index];
 
-                return cardView(job);
+                return GestureDetector(
+                  child: cardView(job),
+                  onTap: () {
+                    selectedJob = job;
+                    Navigator.restorablePushNamed(
+                      context,
+                      '/DetailedJobWidget',
+                    );
+                  },
+                );
               });
         } else {
           return CircularProgressIndicator();
@@ -180,7 +210,16 @@ class JobSearchDelegate extends SearchDelegate {
               itemBuilder: (context, index) {
                 Job job = matchQuery[index];
 
-                return cardView(job);
+                return GestureDetector(
+                  child: cardView(job),
+                  onTap: () {
+                    selectedJob = job;
+                    Navigator.restorablePushNamed(
+                      context,
+                      '/DetailedJobWidget',
+                    );
+                  },
+                );
               });
         } else {
           return CircularProgressIndicator();

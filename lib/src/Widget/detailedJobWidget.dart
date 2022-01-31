@@ -33,9 +33,8 @@ class _DetailedJobWidgetState extends State<DetailedJobWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        home: Scaffold(
-            body: Container(
+    return Scaffold(
+        body: Container(
       margin: EdgeInsets.only(top: 100, right: 30, left: 30),
       padding: EdgeInsets.all(20),
       width: 350,
@@ -188,6 +187,6 @@ class _DetailedJobWidgetState extends State<DetailedJobWidget> {
           )
         ],
       ),
-    )));
+    ));
   }
 }

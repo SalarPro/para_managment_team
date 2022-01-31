@@ -18,25 +18,12 @@ class FirebaseJob {
     yield listOfJobs;
   }
 
-  static Future<List<Job>> getAllJobs() async {
+ 
+
+  static Future<List<Job>> getAllJobs({String? category = '', bool desc=false}) async {
     var snapshot = await FirebaseFirestore.instance
         .collection("jobs")
-        .orderBy("createdAt")
-        .get();
-
-    List<Job> listOfJobs = [];
-
-    snapshot.docs.forEach((element) {
-      listOfJobs.add(Job.fromMap(element.data()));
-    });
-
-    return listOfJobs;
-  }
-
-  static Future<List<Job>> getAllJobs2({String category = ''}) async {
-    var snapshot = await FirebaseFirestore.instance
-        .collection("jobs")
-        .orderBy("createdAt")
+        .orderBy("createdAt",descending: desc)
         .get();
 
     List<Job> listOfJobs = [];

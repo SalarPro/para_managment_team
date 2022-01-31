@@ -27,14 +27,16 @@ class _AddJobState extends State<AddJob> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Center(
-          child: Text(
-            "Add a new job",
-            style: TextStyle(fontSize: 20),
-          ),
+        centerTitle: true,
+        title: const Text(
+          "Add a new job",
+          style: TextStyle(fontSize: 20),
         ),
         actions: [
           TextButton(
+            style: TextButton.styleFrom(
+              primary: Colors.white,
+            ),
             onPressed: () {
               if (_formKey.currentState!.validate()) {
                 var uid = Uuid();
